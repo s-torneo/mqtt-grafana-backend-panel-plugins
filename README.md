@@ -32,7 +32,7 @@ You can run it in the following way:
 This docker-compose start two containers, one with grafana and one with nginx.
 An example of datasource (grafana backend plugin) and some dashboards are loaded directly by docker-compose.
 
-You can access to the Grafana to the address: http://localhost:{your_port}.
+You can access to Grafana to the address: http://localhost:{your_port}.
 
 
 To compile and build Grafana plugins:
