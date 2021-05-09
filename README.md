@@ -14,7 +14,12 @@ In the panel plugin you can select one of the following operations:
 - GetData
 
 in order to show a different interface according to the operation selected.
-You can also insert the mqtt topic and choose the color of the button and of the text.
+You can also:
+- insert the mqtt topic (Grafana variables supported)
+- insert the message to send in order to not have a text box with the Publish button
+- choose the button name
+- choose the color of the button 
+- choose the text color of the button
 
 ![backend-plugin](https://github.com/s-torneo/mqtt-grafana-backend-panel-plugins/blob/master/img/backend-plugin.png "backend-plugin")
 
@@ -25,7 +30,7 @@ You can run it in the following way:
 - DEMO_PORT={your_port} docker-compose up --build
 
 This docker-compose start two containers, one with grafana and one with nginx.
-An example of datasource (grafana backend plugin) and of dashboard is loaded directly by docker-compose.
+An example of datasource (grafana backend plugin) and some dashboards are loaded directly by docker-compose.
 
 You can access to the Grafana to the address: http://localhost:{your_port}.
 
