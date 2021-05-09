@@ -20,7 +20,7 @@ class MyDataSource extends DataSourceWithBackend<DataQuery, DataSourceJsonData> 
 }
 
 export const MqttPanel: React.FC<Props> = ({ options, data, width, height, replaceVariables }) => {
-  const { datasource, mqttTopic, color_button, color_text, operation, publishMsg } = options;
+  const { datasource, mqttTopic, color_button, color_text, operation, publishMsg, buttonName } = options;
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
@@ -164,7 +164,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={c.connectName}
+              title={buttonName === '' ? c.connectName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -179,7 +179,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={c.disconnectName}
+              title={buttonName === '' ? c.disconnectName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -194,7 +194,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={c.subName}
+              title={buttonName === '' ? c.subName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -209,7 +209,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={c.unsubscribeName}
+              title={buttonName === '' ? c.unsubscribeName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -225,7 +225,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
           <div className="centerFlex">
             {publishMsg === '' ? <Form type="text" value={message} handle={handleMessage}></Form> : ''}
             <Button
-              title={c.publishName}
+              title={buttonName === '' ? c.publishName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -241,7 +241,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
           <Response value={c.getDataTitle + topic}></Response>
           <Response value={mqttData}></Response>
           <Button
-            title={c.deleteName}
+            title={buttonName === '' ? c.deleteName : buttonName}
             backgroundcolor={color_button}
             textcolor={color_text}
             classname={c.buttonClass}

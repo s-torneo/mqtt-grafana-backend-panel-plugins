@@ -24,31 +24,37 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
     .addTextInput({
       path: 'mqttTopic',
       name: 'Topic',
-      description: 'MQTT Topic',
+      description: 'Insert MQTT Topic (Grafana variables supported)',
       defaultValue: 'test',
     })
     .addTextInput({
       path: 'publishMsg',
       name: 'Message',
-      description: 'MQTT Message',
+      description: 'Insert MQTT Message',
       defaultValue: '',
     })
-    .addColorPicker({
-      path: 'color_text',
-      name: 'Text Color of button',
-      description: '',
+    .addTextInput({
+      path: 'buttonName',
+      name: 'Button Name',
+      description: 'Insert the button name',
       defaultValue: '',
     })
     .addColorPicker({
       path: 'color_button',
       name: 'Button Color',
-      description: 'Color of the button',
+      description: 'Choose the color of the button',
+      defaultValue: '',
+    })
+    .addColorPicker({
+      path: 'color_text',
+      name: 'Button Text Color',
+      description: 'Choose the text color of the button',
       defaultValue: '',
     })
     .addTextInput({
       path: 'datasource',
       name: 'Datasource Id',
-      description: 'Id of the datasource',
+      description: 'Id of the datasource (corresponds to the mqtt client configured)',
       defaultValue: '1',
     });
 });
