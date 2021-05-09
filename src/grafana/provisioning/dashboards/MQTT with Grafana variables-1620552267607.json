@@ -1,0 +1,389 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1620552202746,
+  "links": [],
+  "panels": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "test",
+        "operation": "connect",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 7,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "test",
+        "operation": "disconnect",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 9,
+        "x": 14,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "data",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 0,
+        "y": 4
+      },
+      "id": 6,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "subscribe",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 7,
+        "y": 4
+      },
+      "id": 7,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "unsubscribe",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 0,
+        "y": 9
+      },
+      "id": 3,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "publish",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 7,
+        "y": 9
+      },
+      "id": 8,
+      "options": {
+        "buttonName": "Alarm",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "publish",
+        "publishMsg": "alarm",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "test",
+          "value": "test"
+        },
+        "hide": 0,
+        "label": "Topic",
+        "name": "topic",
+        "options": [
+          {
+            "selected": true,
+            "text": "test",
+            "value": "test"
+          },
+          {
+            "selected": false,
+            "text": "test2",
+            "value": "test2"
+          },
+          {
+            "selected": false,
+            "text": "test3",
+            "value": "test3"
+          }
+        ],
+        "query": "test,test2,test3",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "MQTT with Grafana variables",
+  "uid": "OGjsxDCGz2",
+  "version": 6
+}

@@ -7,3 +7,10 @@ providers:
     updateIntervalSeconds: 10  # <int> how often Grafana will scan for changed dashboards
     options:
       path:  /var/lib/grafana/dashboards
+  
+  - name: MQTT with Grafana variables    # A uniquely identifiable name for the provider
+    folder: '' # The folder where to place the dashboards
+    type: file
+    updateIntervalSeconds: 10  # <int> how often Grafana will scan for changed dashboards
+    options:
+      path:  /var/lib/grafana/dashboards
