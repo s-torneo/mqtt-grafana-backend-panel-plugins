@@ -22,7 +22,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
       },
     })
     .addTextInput({
-      path: 'topic',
+      path: 'mqttTopic',
       name: 'Topic',
       description: 'MQTT Topic',
       defaultValue: 'test',

@@ -1,7 +1,7 @@
 import { DataSourceJsonData } from '@grafana/data';
 
 export interface SimpleOptions {
-  topic: string;
+  mqttTopic: string;
   color_text: string;
   color_button: string;
   datasource: number;

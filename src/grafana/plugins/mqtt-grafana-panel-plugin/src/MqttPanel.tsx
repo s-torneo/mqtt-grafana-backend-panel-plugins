@@ -20,11 +20,13 @@ class MyDataSource extends DataSourceWithBackend<DataQuery, DataSourceJsonData> 
 }
 
 export const MqttPanel: React.FC<Props> = ({ options, data, width, height, replaceVariables }) => {
-  const { datasource, topic, color_button, color_text, operation, publishMsg } = options;
+  const { datasource, mqttTopic, color_button, color_text, operation, publishMsg } = options;
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
   const [mqttData, setData] = useState('');
+
+  let topic = replaceVariables(mqttTopic);
 
   const settings = {
     id: datasource,
