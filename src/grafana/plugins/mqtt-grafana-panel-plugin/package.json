@@ -1,0 +1,33 @@
+{
+  "name": "MqttPlugin",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Stefano Torneo",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "latest",
+    "@grafana/runtime": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
+    "@types/lodash": "latest",
+    "babel-loader": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  },
+  "resolutions": {
+    "rxjs": "6.6.3"
+  },
+  "dependencies": {
+    "mqtt": "^4.2.6",
+    "react-color": "^2.19.3",
+    "react-switch": "^6.0.0",
+    "reactcss": "^1.2.3"
+  }
+}

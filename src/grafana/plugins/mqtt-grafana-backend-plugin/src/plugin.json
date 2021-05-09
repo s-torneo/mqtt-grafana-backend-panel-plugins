@@ -1,0 +1,39 @@
+{
+  "type": "datasource",
+  "name": "MqttClient",
+  "id": "mqtt-grafana-backend-plugin",
+  "metrics": true,
+  "backend": true,
+  "executable": "gpx_mqtt-plugin",
+  "info": {
+    "description": "",
+    "author": {
+      "name": "Stefano Torneo",
+      "url": ""
+    },
+    "keywords": [
+      "MQTT"
+    ],
+    "logos": {
+      "small": "",
+      "large": ""
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/simple-datasource-backend"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/simple-datasource-backend/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.x.x",
+    "plugins": []
+  }
+}

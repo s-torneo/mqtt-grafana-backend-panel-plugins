@@ -1,0 +1,13 @@
+#automatically adds the correct datasource to grafana
+apiVersion: 1
+
+datasources:
+  - name: MqttClient
+    type: mqtt-grafana-backend-plugin
+    jsonData:
+      broker: broker.emqx.io
+      port: "1883"
+      clientId: go_mqtt_client
+      username: emqx
+    secureJsonData:
+      password: public

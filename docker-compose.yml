@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    grafana:
+        build:
+            context: ./src/grafana
+            dockerfile: Dockerfile
+        environment: 
+            - GF_SERVER_DOMAIN=localhost
+            - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana
+            - GF_SERVER_SERVE_FROM_SUB_PATH=true
+            - GF_PATHS_PLUGINS=/data/grafana/plugins
+            - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mqtt-grafana-backend-plugin,mqtt-grafana-panel-plugin
+        volumes:
+            - grafana-demo-data:/var/lib/grafana
+            - ./src/grafana/plugins/mqtt-grafana-panel-plugin/dist:/data/grafana/plugins/mqtt-grafana-panel-plugin
+            - ./src/grafana/plugins/mqtt-grafana-backend-plugin/dist:/data/grafana/plugins/mqtt-grafana-backend-plugin
+            - ./src/grafana/provisioning/dashboards:/var/lib/grafana/dashboards/
+
+    nginx:
+        restart: always
+        build: ./src/nginx
+        ports:
+            - "127.0.0.1:${DEMO_PORT}:80"
+
+volumes:
+    grafana-demo-data:
