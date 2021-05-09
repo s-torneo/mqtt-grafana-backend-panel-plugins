@@ -20,8 +20,8 @@ class MyDataSource extends DataSourceWithBackend<DataQuery, DataSourceJsonData> 
 }
 
 export const MqttPanel: React.FC<Props> = ({ options, data, width, height, replaceVariables }) => {
-  const { datasource, topic, color_button, color_text, operation } = options;
-  const [payload, setPayload] = useState('');
+  const { datasource, topic, color_button, color_text, operation, publishMsg } = options;
+  const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
   const [mqttData, setData] = useState('');
@@ -110,10 +110,16 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   }*/
 
   function handleMessage(e: any) {
-    setPayload(e.target.value);
+    setMessage(e.target.value);
   }
 
   function handlePublish() {
+    let payload = '';
+    if (publishMsg !== '') {
+      payload = publishMsg;
+    } else {
+      payload = message;
+    }
     const body = { topic: topic, message: payload };
     console.log('Request: ' + url + ' body: ' + JSON.stringify(body));
 
@@ -215,7 +221,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       return (
         <div>
           <div className="centerFlex">
-            <Form type="text" value={payload} handle={handleMessage}></Form>
+            {publishMsg === '' ? <Form type="text" value={message} handle={handleMessage}></Form> : ''}
             <Button
               title={c.publishName}
               backgroundcolor={color_button}

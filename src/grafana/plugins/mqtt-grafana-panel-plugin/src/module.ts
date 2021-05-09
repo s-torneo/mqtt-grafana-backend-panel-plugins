@@ -27,6 +27,12 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
       description: 'MQTT Topic',
       defaultValue: 'test',
     })
+    .addTextInput({
+      path: 'publishMsg',
+      name: 'Message',
+      description: 'MQTT Message',
+      defaultValue: '',
+    })
     .addColorPicker({
       path: 'color_text',
       name: 'Text Color of button',

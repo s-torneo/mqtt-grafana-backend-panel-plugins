@@ -6,6 +6,7 @@ export interface SimpleOptions {
   color_button: string;
   datasource: number;
   operation: string;
+  publishMsg: string;
 }
 
 export type GetDataResponse = {
