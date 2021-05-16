@@ -27,7 +27,6 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
   const [mqttData, setData] = useState('');
-  const [connStatus, setConnStatus] = useState('');
 
   const settings = {
     id: datasource,
@@ -111,8 +110,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     console.log('Request: ' + url);
 
     ds.getResource(url).then((resp) => {
-      setConnStatus(resp.response);
-      console.log('CONNECTION: ', resp.response);
+      setResponse(resp.response);
     });
   }
 
@@ -263,7 +261,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       return (
         <div>
           <Response value="Connection Status"></Response>
-          {connStatus === 'true' ? (
+          {response === 'true' ? (
             <Badge dot={true} status="success" text="Connected" />
           ) : (
             <Badge dot={true} status="error" text="Disconnected" />
