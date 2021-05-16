@@ -164,7 +164,7 @@ func (ds *MqttDatasource) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	router.Methods(http.MethodGet).Path("/connection").HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			log.DefaultLogger.Info("ServeHTTP", "Request", "Connection")
+			log.DefaultLogger.Info("ServeHTTP", "Request", "ConnectionStatus")
 			check := ds.mqttClient.IsConnected()
 			json.NewEncoder(w).Encode(mqtt.MakeResponse(fmt.Sprintf("%v", check), nil))
 		})

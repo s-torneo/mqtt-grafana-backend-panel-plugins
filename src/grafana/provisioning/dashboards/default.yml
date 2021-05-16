@@ -4,13 +4,13 @@ providers:
   - name: MQTT    # A uniquely identifiable name for the provider
     folder: '' # The folder where to place the dashboards
     type: file
-    updateIntervalSeconds: 10  # <int> how often Grafana will scan for changed dashboards
+    allowUiUpdates: true  # <bool> allow updating provisioned dashboards from the UI
     options:
       path:  /var/lib/grafana/dashboards
   
   - name: MQTT with Grafana variables    # A uniquely identifiable name for the provider
     folder: '' # The folder where to place the dashboards
     type: file
-    updateIntervalSeconds: 10  # <int> how often Grafana will scan for changed dashboards
+    allowUiUpdates: true  # <bool> allow updating provisioned dashboards from the UI
     options:
       path:  /var/lib/grafana/dashboards

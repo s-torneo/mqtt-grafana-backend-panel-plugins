@@ -18,6 +18,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
           { label: c.unsubscribeName, value: c.unsubscribeOp },
           { label: c.publishName, value: c.publishOp },
           { label: c.getDataName, value: c.getDataOp },
+          { label: c.isConnectedName, value: c.isConnectedOp },
         ],
       },
     })

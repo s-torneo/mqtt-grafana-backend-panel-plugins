@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1620552202746,
+  "iteration": 1621186166851,
   "links": [],
   "panels": [
     {
@@ -132,21 +132,20 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
+        "h": 4,
         "w": 9,
         "x": 14,
         "y": 0
       },
-      "id": 5,
+      "id": 10,
       "options": {
         "buttonName": "",
         "color_button": "",
         "color_text": "",
         "datasource": "1",
-        "mqttTopic": "$topic",
-        "operation": "data",
-        "publishMsg": "",
-        "topic": "test"
+        "mqttTopic": "test",
+        "operation": "connection",
+        "publishMsg": ""
       },
       "pluginVersion": "7.2.2",
       "timeFrom": null,
@@ -235,6 +234,51 @@
         "datasource": "1",
         "mqttTopic": "$topic",
         "operation": "unsubscribe",
+        "publishMsg": "",
+        "topic": "test"
+      },
+      "pluginVersion": "7.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "mqtt-grafana-panel-plugin"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 14,
+        "y": 4
+      },
+      "id": 5,
+      "options": {
+        "buttonName": "",
+        "color_button": "",
+        "color_text": "",
+        "datasource": "1",
+        "mqttTopic": "$topic",
+        "operation": "data",
         "publishMsg": "",
         "topic": "test"
       },
@@ -385,5 +429,5 @@
   "timezone": "",
   "title": "MQTT with Grafana variables",
   "uid": "OGjsxDCGz2",
-  "version": 6
+  "version": 16
 }

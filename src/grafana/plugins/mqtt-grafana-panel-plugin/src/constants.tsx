@@ -13,7 +13,7 @@ export const disconnectName = 'Disconnect';
 export const subName = 'Subscribe';
 export const unsubscribeName = 'Unsubscribe';
 export const publishName = 'Publish';
-export const isConnectedName = 'IsConnected';
+export const isConnectedName = 'Connection Status';
 export const getDataName = 'Get Data';
 export const deleteName = 'Delete';
 

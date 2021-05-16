@@ -7,6 +7,7 @@ import { GetDataResponse, SimpleOptions } from 'types';
 import { DataSourceWithBackend } from '@grafana/runtime';
 import { DataSourceJsonData, DataQuery, DataSourceInstanceSettings } from '@grafana/data';
 import { CronJob } from 'cron';
+import { Badge } from 'antd';
 
 import * as c from './constants';
 import './style.css';
@@ -26,6 +27,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
   const [mqttData, setData] = useState('');
+  const [connStatus, setConnStatus] = useState('');
 
   const settings = {
     id: datasource,
@@ -39,12 +41,16 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   lastTopic.current = topic;
 
   if (init && operation === c.getDataOp) {
-    scheduleJob();
+    scheduleJob(handleGetData);
   }
 
-  function scheduleJob() {
+  if (init && operation === c.isConnectedOp) {
+    scheduleJob(handleCheckConnection);
+  }
+
+  function scheduleJob(func: any) {
     let cronJob = new CronJob('*/5 * * * * *', async () => {
-      await handleGetData();
+      await func();
     });
 
     // Start job
@@ -100,18 +106,15 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     });
   }
 
-  /*function handleCheckConnection() {
+  function handleCheckConnection() {
     const url = c.isConnectedOp;
     console.log('Request: ' + url);
 
     ds.getResource(url).then((resp) => {
-      if (resp.err !== '') {
-        setResponse(resp.err);
-        return;
-      }
-      setResponse(resp.response);
+      setConnStatus(resp.response);
+      console.log('CONNECTION: ', resp.response);
     });
-  }*/
+  }
 
   function handleMessage(e: any) {
     setMessage(e.target.value);
@@ -254,6 +257,17 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
             classname={c.buttonClass}
             handle={handleDeleteData}
           ></Button>
+        </div>
+      );
+    case c.isConnectedOp:
+      return (
+        <div>
+          <Response value="Connection Status"></Response>
+          {connStatus === 'true' ? (
+            <Badge dot={true} status="success" text="Connected" />
+          ) : (
+            <Badge dot={true} status="error" text="Disconnected" />
+          )}
         </div>
       );
     default:
