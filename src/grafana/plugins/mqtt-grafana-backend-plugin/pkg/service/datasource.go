@@ -63,8 +63,10 @@ func (ds *MqttDatasource) CheckHealth(ctx context.Context, req *backend.CheckHea
 
 	log.DefaultLogger.Info("CheckHealth", "PluginContext", req.PluginContext, "Settings", settings)
 
+	if ds.mqttClient.IsSameConnection(&settings) {
+		ds.mqttClient.Disconnect()
+	}
 	ds.mqttClient = mqtt.NewMqttClient(&settings)
-
 	err = ds.mqttClient.Connect()
 	if err != nil {
 		return &backend.CheckHealthResult{
@@ -94,6 +96,9 @@ func (ds *MqttDatasource) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			log.DefaultLogger.Info("PluginContext", pluginCtx, "PluginSettings", settings)
+			if ds.mqttClient.IsSameConnection(settings) {
+				ds.mqttClient.Disconnect()
+			}
 			ds.mqttClient = mqtt.NewMqttClient(settings)
 			err = ds.mqttClient.Connect()
 			if err != nil {

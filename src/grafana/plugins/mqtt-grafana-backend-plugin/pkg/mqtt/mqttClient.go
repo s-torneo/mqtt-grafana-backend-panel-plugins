@@ -79,9 +79,9 @@ var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err
 }
 
 func (mc MqttClient) Connect() error {
-	if mc.IsConnected() {
+	/*if mc.IsConnected() {
 		mc.Disconnect()
-	}
+	}*/
 	if token := mc.Client.Connect(); token.Wait() && token.Error() != nil {
 		return errors.New("Error during connect: " + token.Error().Error())
 	}
@@ -137,4 +137,13 @@ func (mc MqttClient) GetData(topic string) []string {
 
 func (mc MqttClient) DeleteData(topic string) {
 	queue.Remove(topic)
+}
+
+// IsSameConnection This allow to check if another client is connected to the broker with the same client identifier
+// because this is a cause of random disconnections
+func (mc MqttClient) IsSameConnection(settings *MqttConfigurations) bool {
+	if settings.Broker == mc.MqttConfig.Broker && settings.Port == mc.MqttConfig.Port && settings.ClientId == mc.MqttConfig.ClientId {
+		return true
+	}
+	return false
 }
