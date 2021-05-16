@@ -79,9 +79,6 @@ var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err
 }
 
 func (mc MqttClient) Connect() error {
-	/*if mc.IsConnected() {
-		mc.Disconnect()
-	}*/
 	if token := mc.Client.Connect(); token.Wait() && token.Error() != nil {
 		return errors.New("Error during connect: " + token.Error().Error())
 	}

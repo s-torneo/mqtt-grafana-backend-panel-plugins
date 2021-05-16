@@ -39,6 +39,10 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   lastTopic.current = topic;
 
   if (init && operation === c.getDataOp) {
+    scheduleJob();
+  }
+
+  function scheduleJob() {
     let cronJob = new CronJob('*/5 * * * * *', async () => {
       await handleGetData();
     });
@@ -115,7 +119,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
 
   function handlePublish() {
     let payload = '';
-    if (publishMsg !== '') {
+    if (publishMsg !== undefined && publishMsg !== '') {
       payload = publishMsg;
     } else {
       payload = message;
