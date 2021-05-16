@@ -7,7 +7,7 @@ export interface SimpleOptions {
   datasource: number;
   operation: string;
   publishMsg: string;
-  buttonName: string;
+  buttonName: string | undefined;
 }
 
 export type GetDataResponse = {

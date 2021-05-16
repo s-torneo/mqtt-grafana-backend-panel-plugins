@@ -6,6 +6,7 @@ import { Button, Form } from './Components';
 import { GetDataResponse, SimpleOptions } from 'types';
 import { DataSourceWithBackend } from '@grafana/runtime';
 import { DataSourceJsonData, DataQuery, DataSourceInstanceSettings } from '@grafana/data';
+import { CronJob } from 'cron';
 
 import * as c from './constants';
 import './style.css';
@@ -26,26 +27,24 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   const [init, setInit] = useState(true);
   const [mqttData, setData] = useState('');
 
-  let topic = replaceVariables(mqttTopic);
-
   const settings = {
     id: datasource,
   } as DataSourceInstanceSettings<DataSourceJsonData>;
   const ds = new MyDataSource(settings);
   const url = operation;
 
-  /*if (init && operation === c.connectOp) {
-    handleConnect();
-    setInit(false);
-  }*/
+  let topic = replaceVariables(mqttTopic);
 
   if (init && operation === c.getDataOp) {
-    handleGetData(topic);
-    setInit(false);
-  }
+    let cronJob = new CronJob('*/5 * * * * *', async () => {
+      await handleGetData();
+    });
 
-  function delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    // Start job
+    if (!cronJob.running) {
+      cronJob.start();
+    }
+    setInit(false);
   }
 
   function handleDeleteData() {
@@ -56,20 +55,16 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     });
   }
 
-  function handleGetData(topic: any) {
+  async function handleGetData() {
     const req_url = url + '/' + topic;
     console.log('Request: ' + req_url);
-
-    (async () => {
-      while (true) {
-        ds.getResource(req_url).then((resp) => {
-          let list = resp.response;
-          const listItems = list.map((elem: GetDataResponse) => <li key={elem.toString()}>{elem.payload}</li>);
-          setData(listItems);
-        });
-        await delay(5000);
+    ds.getResource(req_url).then((resp) => {
+      let list = resp.response;
+      if (list !== null) {
+        const listItems = list.map((elem: GetDataResponse) => <li key={elem.toString()}>{elem.payload}</li>);
+        setData(listItems);
       }
-    })();
+    });
   }
 
   function handleSubscribe() {
@@ -158,13 +153,14 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       setResponse(resp.response);
     });
   }
+
   switch (operation) {
     case c.connectOp:
       return (
         <div>
           <div className="centerFlex">
             <Button
-              title={buttonName === '' ? c.connectName : buttonName}
+              title={buttonName === undefined || buttonName === '' ? c.connectName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -179,7 +175,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={buttonName === '' ? c.disconnectName : buttonName}
+              title={buttonName === undefined || buttonName === '' ? c.disconnectName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -194,7 +190,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={buttonName === '' ? c.subName : buttonName}
+              title={buttonName === undefined || buttonName === '' ? c.subName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -209,7 +205,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
         <div>
           <div className="centerFlex">
             <Button
-              title={buttonName === '' ? c.unsubscribeName : buttonName}
+              title={buttonName === undefined || buttonName === '' ? c.unsubscribeName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -223,9 +219,13 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       return (
         <div>
           <div className="centerFlex">
-            {publishMsg === '' ? <Form type="text" value={message} handle={handleMessage}></Form> : ''}
+            {publishMsg === undefined || publishMsg === '' ? (
+              <Form type="text" value={message} handle={handleMessage}></Form>
+            ) : (
+              ''
+            )}
             <Button
-              title={buttonName === '' ? c.publishName : buttonName}
+              title={buttonName === undefined || buttonName === '' ? c.publishName : buttonName}
               backgroundcolor={color_button}
               textcolor={color_text}
               classname={c.buttonClass}
@@ -241,7 +241,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
           <Response value={c.getDataTitle + topic}></Response>
           <Response value={mqttData}></Response>
           <Button
-            title={buttonName === '' ? c.deleteName : buttonName}
+            title={buttonName === undefined || buttonName === '' ? c.deleteName : buttonName}
             backgroundcolor={color_button}
             textcolor={color_text}
             classname={c.buttonClass}
