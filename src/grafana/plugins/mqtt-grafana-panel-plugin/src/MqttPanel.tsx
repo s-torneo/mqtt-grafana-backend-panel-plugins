@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanelProps } from '@grafana/data';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Response from './Response';
 import { Button, Form } from './Components';
 import { GetDataResponse, SimpleOptions } from 'types';
@@ -33,7 +33,10 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   const ds = new MyDataSource(settings);
   const url = operation;
 
+  const lastTopic = useRef();
   let topic = replaceVariables(mqttTopic);
+  // @ts-ignore
+  lastTopic.current = topic;
 
   if (init && operation === c.getDataOp) {
     let cronJob = new CronJob('*/5 * * * * *', async () => {
@@ -56,7 +59,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   }
 
   async function handleGetData() {
-    const req_url = url + '/' + topic;
+    const req_url = url + '/' + lastTopic.current;
     console.log('Request: ' + req_url);
     ds.getResource(req_url).then((resp) => {
       let list = resp.response;
@@ -118,7 +121,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       payload = message;
     }
     const body = { topic: topic, message: payload };
-    console.log('Request: ' + url + ' body: ' + JSON.stringify(body));
+    console.log('Request: ' + url + ' Body: ' + JSON.stringify(body));
 
     ds.postResource(url, body).then((resp) => {
       if (resp.err !== '') {
