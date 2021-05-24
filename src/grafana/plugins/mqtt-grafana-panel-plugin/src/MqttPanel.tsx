@@ -39,7 +39,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   // @ts-ignore
   lastTopic.current = topic;
 
-  if (init && operation === c.getDataOp) {
+  if (init && operation === c.msgListOp) {
     scheduleJob(handleGetData);
   }
 
@@ -75,6 +75,8 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
       if (list !== null) {
         const listItems = list.map((elem: GetDataResponse) => <li key={elem.toString()}>{elem.payload}</li>);
         setData(listItems);
+      } else {
+        setData('');
       }
     });
   }
@@ -243,10 +245,10 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
           {response !== null ? <Response value={response}></Response> : ''}
         </div>
       );
-    case c.getDataOp:
+    case c.msgListOp:
       return (
         <div>
-          <Response value={c.getDataTitle + topic}></Response>
+          <Response value={c.msgListTitle + topic}></Response>
           <Response value={mqttData}></Response>
           <Button
             title={buttonName === undefined || buttonName === '' ? c.deleteName : buttonName}
