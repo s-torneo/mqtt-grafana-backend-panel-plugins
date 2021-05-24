@@ -11,7 +11,7 @@ In the panel plugin you can select one of the following operations:
 - Subscribe
 - Unsubscribe
 - Publish
-- GetData
+- Messages List
 - Connection Status
 
 in order to show a different interface according to the operation selected.
