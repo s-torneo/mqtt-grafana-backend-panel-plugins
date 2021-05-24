@@ -2,8 +2,8 @@ import React from 'react';
 import { PanelProps } from '@grafana/data';
 import { useState, useRef } from 'react';
 import Response from './Response';
-import { Button, Form } from './Components';
-import { GetDataResponse, SimpleOptions } from 'types';
+import { Button, Form, StickyHeadTable } from './Components';
+import { SimpleOptions } from 'types';
 import { DataSourceWithBackend } from '@grafana/runtime';
 import { DataSourceJsonData, DataQuery, DataSourceInstanceSettings } from '@grafana/data';
 import { CronJob } from 'cron';
@@ -26,7 +26,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
-  const [mqttData, setData] = useState('');
+  const [msgList, setMsgList] = useState([]);
 
   const settings = {
     id: datasource,
@@ -39,7 +39,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
   // @ts-ignore
   lastTopic.current = topic;
 
-  if (init && operation === c.getDataOp) {
+  if (init && operation === c.msgListOp) {
     scheduleJob(handleGetData);
   }
 
@@ -63,7 +63,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     const req_url = url + '/' + topic + '/delete';
     console.log('Request: ' + req_url);
     ds.postResource(req_url).then((resp) => {
-      setData('');
+      setMsgList([]);
     });
   }
 
@@ -73,8 +73,9 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     ds.getResource(req_url).then((resp) => {
       let list = resp.response;
       if (list !== null) {
-        const listItems = list.map((elem: GetDataResponse) => <li key={elem.toString()}>{elem.payload}</li>);
-        setData(listItems);
+        setMsgList(list);
+      } else {
+        setMsgList([]);
       }
     });
   }
@@ -243,11 +244,10 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
           {response !== null ? <Response value={response}></Response> : ''}
         </div>
       );
-    case c.getDataOp:
+    case c.msgListOp:
       return (
         <div>
-          <Response value={c.getDataTitle + topic}></Response>
-          <Response value={mqttData}></Response>
+          <StickyHeadTable rows={msgList}></StickyHeadTable>
           <Button
             title={buttonName === undefined || buttonName === '' ? c.deleteName : buttonName}
             backgroundcolor={color_button}

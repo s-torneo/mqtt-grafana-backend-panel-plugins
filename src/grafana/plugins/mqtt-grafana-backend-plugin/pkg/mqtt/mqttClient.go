@@ -6,6 +6,7 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	cmap "github.com/orcaman/concurrent-map"
+	"time"
 )
 
 type MqttConfigurations struct {
@@ -51,11 +52,11 @@ func makeMqttClient(config *MqttConfigurations) mqtt.Client {
 }
 
 func cb (exists bool, valueInMap interface{}, newValue interface{}) interface{} {
-	nv := newValue.(string)
+	nv := newValue.(Message)
 	if !exists {
-		return []string{nv}
+		return []Message{nv}
 	}
-	res := valueInMap.([]string)
+	res := valueInMap.([]Message)
 	return append(res, nv)
 }
 
@@ -63,7 +64,13 @@ var messagePubHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Me
 	topic := msg.Topic()
 	payload := string(msg.Payload())
 	log.DefaultLogger.Info("Message Handler", "Payload", payload, "Topic", topic)
-	queue.Upsert(topic, payload, cb)
+	data := Message{
+		Payload: payload,
+		Topic: topic,
+		Timestamp: time.Now().UTC(),
+	}
+	log.DefaultLogger.Info("Message Handler", "Data", data)
+	queue.Upsert(topic, data, cb)
 }
 
 var reconnectHandler mqtt.ReconnectHandler = func(client mqtt.Client, options *mqtt.ClientOptions) {
@@ -120,12 +127,13 @@ func (mc MqttClient) IsConnected() bool {
 	return mc.Client.IsConnected()
 }
 
-func (mc MqttClient) GetData(topic string) []string {
-	var result []string
+func (mc MqttClient) GetData(topic string) []Message {
+	var result []Message
 	if queue != nil {
 		data, ok := queue.Get(topic)
-		listItems, check := data.([]string)
+		listItems, check := data.([]Message)
 		if ok && check {
+			log.DefaultLogger.Info("GetData", "Payload", listItems)
 			result = listItems
 		}
 	}
