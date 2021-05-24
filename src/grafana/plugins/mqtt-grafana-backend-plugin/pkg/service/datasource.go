@@ -175,7 +175,7 @@ func (ds *MqttDatasource) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			topic := vars["topic"]
 			log.DefaultLogger.Info("ServeHTTP", "Request", "GetData", "Topic", topic)
 			data := ds.mqttClient.GetData(topic)
-			json.NewEncoder(w).Encode(mqtt.MakeGetDataResponse(data, nil))
+			json.NewEncoder(w).Encode(mqtt.GetDataResponse{Res: data})
 		})
 
 	router.Methods(http.MethodPost).Path("/data/{topic}/delete").HandlerFunc(

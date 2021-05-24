@@ -10,8 +10,4 @@ export interface SimpleOptions {
   buttonName: string;
 }
 
-export type GetDataResponse = {
-  payload: string;
-};
-
 export interface DataSourceOptions extends DataSourceJsonData {}
