@@ -107,7 +107,7 @@ function StickyHeadTable(props: any) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={props.rowsPerPageOptions}
         component="div"
         count={props.rows.length}
         rowsPerPage={rowsPerPage}

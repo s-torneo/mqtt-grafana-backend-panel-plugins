@@ -10,6 +10,7 @@ export interface SimpleOptions {
   buttonName: string;
   backgroundcolor_table: string;
   textcolor_table: string;
+  rowsPerPage_table: string;
 }
 
 export interface DataSourceOptions extends DataSourceJsonData {}

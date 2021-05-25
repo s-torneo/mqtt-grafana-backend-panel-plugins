@@ -65,6 +65,12 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
       defaultValue: 'black',
     })
     .addTextInput({
+      path: 'rowsPerPage_table',
+      name: 'Table Rows Per Page',
+      description: 'Choose the table rows per page (separated by comma)',
+      defaultValue: '10,25,100',
+    })
+    .addTextInput({
       path: 'datasource',
       name: 'Datasource Id',
       description: 'Id of the datasource (corresponds to the mqtt client configured)',

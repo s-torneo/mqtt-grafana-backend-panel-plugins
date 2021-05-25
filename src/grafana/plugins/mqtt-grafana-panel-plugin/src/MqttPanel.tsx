@@ -32,6 +32,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     buttonName,
     backgroundcolor_table,
     textcolor_table,
+    rowsPerPage_table,
   } = options;
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
@@ -261,6 +262,7 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
             rows={msgList}
             backgroundcolor={backgroundcolor_table}
             textcolor={textcolor_table}
+            rowsPerPageOptions={rowsPerPage_table.split(',').map(Number)}
           ></StickyHeadTable>
           <Button
             title={buttonName === undefined || buttonName === '' ? c.deleteName : buttonName}
