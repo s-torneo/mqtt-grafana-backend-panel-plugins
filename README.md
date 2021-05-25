@@ -21,6 +21,8 @@ You can also:
 - choose the button name
 - choose the color of the button 
 - choose the text color of the button
+- choose the color of the table
+- choose the text color of the table
 
 ![backend-plugin](https://github.com/s-torneo/mqtt-grafana-backend-panel-plugins/blob/master/img/backend-plugin.png "backend-plugin")
 

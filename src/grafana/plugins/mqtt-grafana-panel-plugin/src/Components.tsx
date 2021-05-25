@@ -74,7 +74,11 @@ function StickyHeadTable(props: any) {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell key={column.id} align={'center'} style={{ minWidth: column.minWidth }}>
+                <TableCell
+                  key={column.id}
+                  align={'center'}
+                  style={{ minWidth: column.minWidth, backgroundColor: props.backgroundcolor, color: props.textcolor }}
+                >
                   {column.label}
                 </TableCell>
               ))}
@@ -87,7 +91,11 @@ function StickyHeadTable(props: any) {
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={'center'}>
+                      <TableCell
+                        key={column.id}
+                        align={'center'}
+                        style={{ backgroundColor: props.backgroundcolor, color: props.textcolor }}
+                      >
                         {column.id === 'ts' ? new Date(value).toLocaleString() : value}
                       </TableCell>
                     );
@@ -106,6 +114,7 @@ function StickyHeadTable(props: any) {
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
+        style={{ backgroundColor: props.backgroundcolor, color: props.textcolor }}
       />
     </Paper>
   );

@@ -44,13 +44,25 @@ export const plugin = new PanelPlugin<SimpleOptions>(MqttPanel).useFieldConfig()
       path: 'color_button',
       name: 'Button Color',
       description: 'Choose the color of the button',
-      defaultValue: '',
+      defaultValue: '#0070ef',
     })
     .addColorPicker({
       path: 'color_text',
       name: 'Button Text Color',
       description: 'Choose the text color of the button',
-      defaultValue: '',
+      defaultValue: 'white',
+    })
+    .addColorPicker({
+      path: 'backgroundcolor_table',
+      name: 'Table Color',
+      description: 'Choose the color of the table',
+      defaultValue: 'white',
+    })
+    .addColorPicker({
+      path: 'textcolor_table',
+      name: 'Table Text Color',
+      description: 'Choose the text color of the table',
+      defaultValue: 'black',
     })
     .addTextInput({
       path: 'datasource',

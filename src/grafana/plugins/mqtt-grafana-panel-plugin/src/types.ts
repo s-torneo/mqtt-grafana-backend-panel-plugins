@@ -8,6 +8,8 @@ export interface SimpleOptions {
   operation: string;
   publishMsg: string;
   buttonName: string;
+  backgroundcolor_table: string;
+  textcolor_table: string;
 }
 
 export interface DataSourceOptions extends DataSourceJsonData {}

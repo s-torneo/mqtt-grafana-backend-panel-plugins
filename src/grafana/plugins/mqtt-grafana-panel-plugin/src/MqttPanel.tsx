@@ -22,7 +22,17 @@ class MyDataSource extends DataSourceWithBackend<DataQuery, DataSourceJsonData> 
 }
 
 export const MqttPanel: React.FC<Props> = ({ options, data, width, height, replaceVariables }) => {
-  const { datasource, mqttTopic, color_button, color_text, operation, publishMsg, buttonName } = options;
+  const {
+    datasource,
+    mqttTopic,
+    color_button,
+    color_text,
+    operation,
+    publishMsg,
+    buttonName,
+    backgroundcolor_table,
+    textcolor_table,
+  } = options;
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [init, setInit] = useState(true);
@@ -247,7 +257,11 @@ export const MqttPanel: React.FC<Props> = ({ options, data, width, height, repla
     case c.msgListOp:
       return (
         <div>
-          <StickyHeadTable rows={msgList}></StickyHeadTable>
+          <StickyHeadTable
+            rows={msgList}
+            backgroundcolor={backgroundcolor_table}
+            textcolor={textcolor_table}
+          ></StickyHeadTable>
           <Button
             title={buttonName === undefined || buttonName === '' ? c.deleteName : buttonName}
             backgroundcolor={color_button}
